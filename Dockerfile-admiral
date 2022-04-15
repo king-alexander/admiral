@@ -30,6 +30,7 @@ RUN apk --no-cache add \
     python3-dev \
     sudo
 
+<<<<<<< HEAD
 RUN echo "cisa ALL=(root) NOPASSWD: /usr/bin/nmap" > /etc/sudoers.d/cisa_nmap \
   && chmod 0440 /etc/sudoers.d/cisa_nmap
 
@@ -38,11 +39,17 @@ RUN python3 -m pip --no-cache-dir install --upgrade pip setuptools wheel
 RUN if [ -n "${INSTALL_IPYTHON}" ]; \
   then python3 -m pip --no-cache-dir install ipython pytest; fi
 
+=======
+>>>>>>> a73bde9 (Install dev dependencies via pip install --editable .[test])
 WORKDIR ${CISA_SRC}
 
 COPY src src
 COPY setup.py README.md ./
+<<<<<<< HEAD
 RUN python3 -m pip --no-cache-dir install --editable .
+=======
+RUN if [ -n "${INSTALL_IPYTHON}" ]; then pip install --editable .[test]; else pip install --editable .; fi
+>>>>>>> a73bde9 (Install dev dependencies via pip install --editable .[test])
 
 USER cisa
 WORKDIR ${CISA_HOME}
