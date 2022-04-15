@@ -25,13 +25,11 @@ RUN pip3 install --upgrade pip
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev make && \
     pip3 install cryptography
 
-RUN if [ -n "${INSTALL_IPYTHON}" ]; then pip install ipython pytest; fi
-
 WORKDIR ${CISA_SRC}
 
 COPY src src
 COPY setup.py README.md ./
-RUN pip install -e .
+RUN if [ -n "${INSTALL_IPYTHON}" ]; then pip install --editable .[test]; else pip install --editable .; fi
 
 USER cisa
 WORKDIR ${CISA_HOME}
