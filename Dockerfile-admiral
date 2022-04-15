@@ -21,7 +21,7 @@ RUN echo "cisa ALL=(root) NOPASSWD: /usr/bin/nmap" > \
     chmod 0440 /etc/sudoers.d/cisa_nmap
 RUN pip3 install --upgrade pip
 
-# compile python cryptography package and cleanup
+# Compile python cryptography package
 RUN apk add gcc musl-dev python3-dev libffi-dev openssl-dev make && \
     pip3 install cryptography
 
